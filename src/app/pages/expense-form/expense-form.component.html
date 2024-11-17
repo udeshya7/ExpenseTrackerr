@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-lg-6">
+        <h4 class="mb-4">Expense Form</h4>
+
+        <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+            <!-- Price Field -->
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="price" 
+                    placeholder="Price" 
+                    formControlName="price">
+                <div *ngIf="expenseForm.get('price')?.hasError('required') && expenseForm.get('price')?.touched" class="form-text text-danger fw-bold">
+                    Price is required
+                </div>
+            </div>
+
+            <!-- Title Field -->
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="title" 
+                    placeholder="Title" 
+                    formControlName="title">
+                <div *ngIf="expenseForm.get('title')?.hasError('required') && expenseForm.get('title')?.touched" class="form-text text-danger fw-bold">
+                    Title is required
+                </div>
+            </div>
+
+            <!-- Category Field -->
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" formControlName="category">
+                    <option value="">Select Category</option>
+                    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                </select>
+                <div *ngIf="expenseForm.get('category')?.hasError('required') && expenseForm.get('category')?.touched" class="form-text text-danger fw-bold">
+                    Category is required
+                </div>
+            </div>
+
+            <!-- Description Field -->
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea 
+                    class="form-control" 
+                    id="description"  
+                    rows="3"
+                    formControlName="description"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
+    </div>
+</div>
